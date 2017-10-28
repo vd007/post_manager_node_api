@@ -113,6 +113,7 @@ dbUtils.createPost = function (username,title,content,status) {
 
 
 dbUtils.updatePost = function (username,title,content,status,post_id) {
+    var post_id = parseInt(post_id);
     var set = '{';
     if(title == undefined ||null){
         console.log('title empty');
@@ -171,6 +172,23 @@ dbUtils.getPosts = function(username) {
         .catch(function(err) {
             throw err;
         });
+};
+
+
+dbUtils.deletePost = function (username,post_id) {
+    var post_id = parseInt(post_id);
+
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var query = {'username':username,'post_id':post_id};
+        console.log(query);
+        db.collection("posts").remove(query, function(err, res) {
+            if (err) throw err;
+            console.log("1 document deleted");
+            db.close();
+        });
+    });
+    return true;
 };
 
 dbUtils.log = function (msg) {
