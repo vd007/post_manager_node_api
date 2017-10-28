@@ -1,4 +1,4 @@
-basic user module
+Post module includes user auth with JWT token
 
 INSTALLATION
 
