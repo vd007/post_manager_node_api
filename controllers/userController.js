@@ -1,14 +1,17 @@
 var mongo_data  = require('../models/mongo_utils');
 
+var auth = require('../common/jwtHelper');
+
 var users ={};
 
 users.login = function (req, res, next) {
     var username = req['query']['username'];
     var password = req['query']['password'];
     var data = mongo_data.getUser(username,password);
+    var api_key = auth.generate(req);
     data.then(function(result) {
         console.log(result);
-        res.send('respond with login '+result[0]['username']+' resource ');
+        res.send('respond with login '+result[0]['username']+' with api key : '+api_key);
     })
 };
 
