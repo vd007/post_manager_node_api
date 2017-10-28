@@ -7,7 +7,7 @@ users.login = function (req, res, next) {
     var password = req['query']['password'];
     var data = mongo_data.getUser(username,password);
     data.then(function(result) {
-        console.log(result)
+        console.log(result);
         res.send('respond with login '+result[0]['username']+' resource ');
     })
 };
