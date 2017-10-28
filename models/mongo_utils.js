@@ -13,7 +13,7 @@ var url = 'mongodb://localhost:27017/users';
 dbUtils.getUser = function(username,password) {
     return MongoClient.connect(url)
         .then(function(db) {
-            return db.collection('users').find({"username":"navneet"});
+            return db.collection('users').find({"username":username,"password":password});
         })
         .then(function(cursor) {
             return cursor.toArray();
