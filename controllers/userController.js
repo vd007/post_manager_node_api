@@ -15,6 +15,12 @@ users.login = function (req, res, next) {
     })
 };
 
+users.googleLogin = function (req, res, next) {
+    res.render('google', { title: 'Express' });
+    console.log("inside users user");
+    console.log(req.query);
+};
+
 users.update = function(req, res, next) {
     var username = req['query']['username'];
     var password = req['query']['password'];

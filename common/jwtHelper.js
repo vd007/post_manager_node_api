@@ -5,7 +5,7 @@ var Auth = {};
 
 // generate the JWT
 Auth.generate = function generateToken(req){
-
+    console.log(req);
     var token = jwt.sign({
         username:  req.username
     }, secret);  // secret is defined in the environment variable JWT_SECRET
@@ -18,9 +18,9 @@ Auth.decode = function validate(req, res, next) {
             var decoded = jwt.verify(token, secret);
         } catch (e) {
             //return authFail(res);
-            res.send("unauthorize");
+            res.send("unauthorized");
         }
-        if(!decoded || decoded.username !== req.username) {
+        if(!decoded) {
             //return authFail(res);
             res.send("unauthorize");
         } else {
